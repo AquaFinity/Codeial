@@ -1,0 +1,26 @@
+header{
+    background-color: cornflowerblue;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+
+    #site-name{
+        font-size: x-large;
+        margin-left: 10px;
+    }
+
+    ul{
+        display: flex;
+        list-style: none;
+        li{
+            margin-left: 3px;
+            a{
+                margin-right: 8px;
+                font-size: large;
+                color: white;
+                text-decoration: none;
+            }
+        }    
+    }
+}

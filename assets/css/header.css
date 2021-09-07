@@ -1,0 +1,19 @@
+header {
+  background-color: cornflowerblue;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: white; }
+  header #site-name {
+    font-size: x-large;
+    margin-left: 10px; }
+  header ul {
+    display: flex;
+    list-style: none; }
+    header ul li {
+      margin-left: 3px; }
+      header ul li a {
+        margin-right: 8px;
+        font-size: large;
+        color: white;
+        text-decoration: none; }
