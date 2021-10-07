@@ -8,7 +8,7 @@ module.exports.profile = function(req,res){
     });
 };
 
-module.exports.update = function(req,res){
+module.exports.update = async function(req,res){
     //check so that any user exept the authorized user can fill the form
     if(req.user.id == req.params.id){
         User.findByIdAndUpdate(req.params.id , req.body , function(err,user){
@@ -17,6 +17,33 @@ module.exports.update = function(req,res){
     }
     else{
         res.status(401).send('Unauthorized');
+    }
+
+    if(req.user.id == req.params.id){
+        try{
+            let user = await User.findById(req.params.id);
+            User.uploadedAvatar(req,res,function(err){
+                if(err){
+                    console.log('******Multer Error: ',err);
+                }
+                user.name = req.body.name;
+                user.email = req.body.email;
+
+                if(req.file){
+                    //this is saving the path of the uploaded file into the avatar field in the user
+                    user.avatar = user.avatarPath + '/' + req.file.filename;
+                }
+                user.save();
+                return res.redirect('/back');
+            });
+        }catch(err){
+            req.flash('error','Unauthorized');
+            return res.status(401).send("Unauthorized");
+        }
+    }
+    else{
+        req.flash('error',"Unauthorized");
+        return res.status(401).send("Unauthorized");
     }
 }
 //Render the sign up page
